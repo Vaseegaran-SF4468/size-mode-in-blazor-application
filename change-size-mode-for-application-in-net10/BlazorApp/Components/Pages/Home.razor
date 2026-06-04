@@ -1,0 +1,43 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@using Syncfusion.Blazor.Calendars
+@using Syncfusion.Blazor.Buttons
+@inject IJSRuntime JSRuntime
+
+<p>Size modes for application</p>
+<p>This demo shows size modes applied for an entire application.</p>
+
+<div class="demo-container">
+    <div>
+        <button @onclick="EnableTouchMode">Touch Mode</button>
+        <button @onclick="EnableMouseMode">Mouse Mode</button>
+    </div>
+
+    <div>
+        <SfCalendar TValue="DateTime?" Value="@DateValue"></SfCalendar>
+    </div>
+
+    <div>
+        <SfButton>Button</SfButton>
+    </div>
+
+    <div>
+        <SfCheckBox Label="Checked" @bind-Checked="isChecked"></SfCheckBox>
+    </div>
+</div>
+
+@code {
+    private bool isChecked = true;
+    public DateTime? DateValue { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 28);
+
+    private async Task EnableTouchMode()
+    {
+        await JSRuntime.InvokeVoidAsync("onTouch");
+    }
+
+    private async Task EnableMouseMode()
+    {
+        await JSRuntime.InvokeVoidAsync("onMouse");
+    }
+}

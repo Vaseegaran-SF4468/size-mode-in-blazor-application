@@ -1,0 +1,57 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@using Syncfusion.Blazor.Calendars
+@using Syncfusion.Blazor.Buttons
+
+<h2>Blazor component size modes</h2>
+<p>This demo shows size modes applied for individual components.</p>
+
+<div class="demo-container">
+    <div>
+        <button @onclick="EnableTouchMode">Touch Mode</button>
+        <button @onclick="EnableMouseMode">Mouse Mode</button>
+    </div>
+
+    <div class="@touchCSS">
+        <SfCalendar TValue="DateTime?" Value="@DateValue"></SfCalendar>
+    </div>
+
+    <div class="@touchCSS">
+        <SfButton>Button</SfButton>
+    </div>
+
+    <div class="@touchCSS">
+        <SfCheckBox Label="Checked" @bind-Checked="isChecked"></SfCheckBox>
+    </div>
+</div>
+
+<style>
+    /* Adds consistent vertical spacing between the Blazor components. */
+    .demo-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Applies the touch-friendly size mode to Blazor components. */
+    .e-bigger {
+        font-size: x-large;
+    }
+</style>
+
+@code {
+    private bool isChecked = true;
+    public DateTime? DateValue { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 28);
+    private string touchCSS = string.Empty;
+
+    private void EnableTouchMode()
+    {
+        touchCSS = "e-bigger";
+    }
+
+    private void EnableMouseMode()
+    {
+        touchCSS = string.Empty;
+    }
+}
